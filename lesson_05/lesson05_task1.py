@@ -9,4 +9,6 @@ driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())
 driver.get("http://uitestingplayground.com/classattr")
 driver.find_element(By.CLASS_NAME, "btn-primary").click()
 
+driver.quit()
+
 sleep(10)

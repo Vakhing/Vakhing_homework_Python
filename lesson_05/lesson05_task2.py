@@ -9,4 +9,7 @@ driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())
 driver.get("http://uitestingplayground.com/dynamicid")
 driver.find_element(By.CLASS_NAME, "btn").click()
 
+
+driver.quit()
+
 sleep(10)
