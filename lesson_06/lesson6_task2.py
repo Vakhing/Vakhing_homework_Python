@@ -14,3 +14,5 @@ driver.find_element(By.CSS_SELECTOR, "#updatingButton").click()
 
 button_txt = driver.find_element(By.CSS_SELECTOR, "#updatingButton").text
 print(button_txt)
+
+driver.quit()
