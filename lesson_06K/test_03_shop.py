@@ -3,37 +3,39 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 
-driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
 
-driver.get("https://www.saucedemo.com/")
+def test_shop():   
+    driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
 
-username = driver.find_element(By.ID, "user-name")
-username.send_keys("standard_user")
+    driver.get("https://www.saucedemo.com/")
 
-password = driver.find_element(By.ID, "password")
-password.send_keys("secret_sauce")
+    username = driver.find_element(By.ID, "user-name")
+    username.send_keys("standard_user")
 
-button_login = driver.find_element(By.ID, "login-button").click()
+    password = driver.find_element(By.ID, "password")
+    password.send_keys("secret_sauce")
 
-driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
-driver.find_element(By.ID, "add-to-cart-sauce-labs-bolt-t-shirt").click()
-driver.find_element(By.ID, "add-to-cart-sauce-labs-onesie").click()
+    driver.find_element(By.ID, "login-button").click()
 
-driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
+    driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
+    driver.find_element(By.ID, "add-to-cart-sauce-labs-bolt-t-shirt").click()
+    driver.find_element(By.ID, "add-to-cart-sauce-labs-onesie").click()
 
-driver.find_element(By.ID, "checkout").click()
-first_name = driver.find_element(By.ID, "first-name")
-first_name.send_keys("Black")
+    driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
 
-last_name = driver.find_element(By.ID, "last-name")
-last_name.send_keys("Cat")
+    driver.find_element(By.ID, "checkout").click()
+    first_name = driver.find_element(By.ID, "first-name")
+    first_name.send_keys("Black")
 
-index = driver.find_element(By.ID, "postal-code")
-index.send_keys("707")
+    last_name = driver.find_element(By.ID, "last-name")
+    last_name.send_keys("Cat")
 
-driver.find_element(By.ID, "continue").click()
+    index = driver.find_element(By.ID, "postal-code")
+    index.send_keys("707")
 
-price = driver.find_element(By.CLASS_NAME, "summary_total_label").text
-print(price)
+    driver.find_element(By.ID, "continue").click()
 
-driver.quit()
+    price = driver.find_element(By.CLASS_NAME, "summary_total_label").text
+    print(price)
+
+    driver.quit()

@@ -27,6 +27,5 @@ def test_fill_form():
 
     green_fields = driver.find_elements(By.CSS_SELECTOR, ".alert.py-2.alert-success")
     assert len(green_fields) == 9
-
-
-test_fill_form()
+    
+    driver.quit()
