@@ -23,17 +23,18 @@ def test_internet_shop(browser):
     main_shop_page.authorization()
 
     products_page = ProductsPage(browser)
-    products_page.add_products()
+    items_to_add = ["Sauce Labs Backpack", "Sauce Labs Bolt T-Shirt", "Sauce Labs Onesie"]
+    products_page.add_products(items_to_add)
     products_page.go_to_cart()
 
     cart_page = CartPage(browser)
-    as_is = cart_page.check_products()
-    to_be = "Sauce Labs Backpack/Sauce Labs Bolt T-Shirt/Sauce Labs Onesie"
-    assert as_is == to_be
+    items_in_cart = cart_page.get_products()
+    assert set(items_in_cart) == set(items_to_add), "Состав корзины не совпадает с ожидаемым"
     cart_page.push_checkout()
 
     order_page = OrderPage(browser)
-    order_page.fill_form()
+    order_page.fill_form("Black", "Cat", "707")
+    
     actual_price = order_page.check_total_price()
     expected_price = "Total: $58.29"
     assert actual_price == expected_price

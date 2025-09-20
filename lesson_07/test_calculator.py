@@ -18,8 +18,12 @@ def browser():
 
 def test_calc(browser):
     page_object = Calculator(browser)
-    page_object.set_time()
-    as_is = page_object.set_values()
-    to_be = page_object.wait_for_result()
+    page_object.set_delay(45)
+    page_object.click_button("7")
+    page_object.click_button("+")
+    page_object.click_button("8")
+    page_object.click_button("=")
+    page_object.wait_for_result("15")
 
-    assert as_is == to_be
+    result = page_object.get_display_value()
+    assert result == '15'

@@ -1,19 +1,23 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class OrderPage:
     def __init__(self, browser):
         self._driver = browser
+        self.wait = WebDriverWait(browser, 4)
 
-    def fill_form(self):
-        first_name = self._driver.find_element(By.ID, "first-name")
-        first_name.send_keys("Black")
+    def fill_form(self, first_name: str, last_name: str, postal_code: str):
 
-        last_name = self._driver.find_element(By.ID, "last-name")
-        last_name.send_keys("Cat")
+        fname_field = self.wait.until(EC.visibility_of_element_located((By.ID, "first-name")))
+        fname_field.send_keys(first_name)
 
-        index = self._driver.find_element(By.ID, "postal-code")
-        index.send_keys("707")
+        lname_field = self._driver.find_element(By.ID, "last-name")
+        lname_field.send_keys(last_name)
+
+        postal_field = self._driver.find_element(By.ID, "postal-code")
+        postal_field.send_keys(postal_code)
 
         self._driver.find_element(By.ID, "continue").click()
 

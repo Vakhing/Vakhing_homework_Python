@@ -9,22 +9,19 @@ class Calculator:
         self._driver = browser
         self.wait = WebDriverWait(browser, 45)
 
-    def set_time(self):
+    def set_delay(self, seconds: int):
         input_field = self._driver.find_element(By.CSS_SELECTOR, "#delay")
         input_field.clear()
-        input_field.send_keys("45")
+        input_field.send_keys(str(seconds))
 
-    def set_values(self):
+    def click_button(self, value: str):
 
-        self._driver.find_element(By.XPATH, "//span[text()='7']").click()
-        self._driver.find_element(By.XPATH, "//span[text()='+']").click()
-        self._driver.find_element(By.XPATH, "//span[text()='8']").click()
-        field_with_values = self._driver.find_element(By.CSS_SELECTOR, ".screen").text
-        print(field_with_values)
-        self._driver.find_element(By.XPATH, "//span[text()='=']").click()
+        self._driver.find_element(By.XPATH, f"//span[text()='{value}']").click()
 
-    def wait_for_result(self):
+    def get_display_value(self):
+
+        return self._driver.find_element(By.CSS_SELECTOR, ".screen").text
+
+    def wait_for_result(self, expected_result: str):
         self.wait.until(
-            EC.text_to_be_present_in_element((By.CSS_SELECTOR, ".screen"), "15"))
-        result_field = self._driver.find_element(By.CSS_SELECTOR, ".screen").text
-        print(result_field)
+            EC.text_to_be_present_in_element((By.CSS_SELECTOR, ".screen"), expected_result))
